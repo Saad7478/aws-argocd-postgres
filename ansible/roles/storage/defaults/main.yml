@@ -1,0 +1,3 @@
+storage_volume_id: null
+storage_mount_path: /data/postgres
+storage_filesystem: xfs

@@ -1,0 +1,26 @@
+- name: Resolve NVMe device
+  shell: |
+    lsblk -dpno NAME,SERIAL | grep {{ storage_volume_id | replace('-', '') }} | awk '{print $1}'
+  register: nvme_device
+  changed_when: false
+
+- debug:
+    var: nvme_device.stdout
+
+- name: Create filesystem
+  filesystem:
+    fstype: "{{ storage_filesystem }}"
+    dev: "{{ nvme_device.stdout }}"
+
+- name: Create mount directory
+  file:
+    path: "{{ storage_mount_path }}"
+    state: directory
+    mode: "0755"
+
+- name: Mount storage
+  mount:
+    path: "{{ storage_mount_path }}"
+    src: "{{ nvme_device.stdout }}"
+    fstype: "{{ storage_filesystem }}"
+    state: mounted
