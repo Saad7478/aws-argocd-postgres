@@ -23,6 +23,16 @@ resource "aws_security_group" "kube_sg" {
   }
 
   ingress {
+    description = "SSH"
+
+    from_port   = 30443
+    to_port     = 30443
+    protocol    = "tcp"
+
+    cidr_blocks = [var.admin_cidr]
+  }
+
+  ingress {
     description = "PostgreSQL"
 
     from_port = 5432
