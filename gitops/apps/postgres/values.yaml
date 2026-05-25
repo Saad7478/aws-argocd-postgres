@@ -18,22 +18,22 @@ postgresql:
       storageClass: "local-path"
       size: 5Gi
 
-    serviceAccount:
-      create: true
-      annotations:
-        eks.amazonaws.com/role-arn: "arn:aws:iam::123456789012:role/votre-role-iam-pgbackrest"
+#    serviceAccount:
+#      create: true
+#      annotations:
+#        eks.amazonaws.com/role-arn: "arn:aws:iam::123456789012:role/votre-role-iam-pgbackrest"
 
-    extendedConfiguration: |
-      archive_mode = on
-      archive_command = 'pgbackrest --stanza=db-main archive-push %p'
-      wal_level = replica
-      max_wal_senders = 10
+#    extendedConfiguration: |
+#      archive_mode = on
+#      archive_command = 'pgbackrest --stanza=db-main archive-push %p'
+#      wal_level = replica
+#      max_wal_senders = 10
 
-    extraVolumeMounts:
-      - name: pgbackrest-config
-        mountPath: /etc/pgbackrest
+#    extraVolumeMounts:
+#      - name: pgbackrest-config
+#       mountPath: /etc/pgbackrest
 
-    extraVolumes:
-      - name: pgbackrest-config
-        configMap:
-          name: pgbackrest-config
+#    extraVolumes:
+#      - name: pgbackrest-config
+#        configMap:
+#          name: pgbackrest-config
