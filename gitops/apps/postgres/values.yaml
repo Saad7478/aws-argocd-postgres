@@ -18,11 +18,10 @@ postgresql:
       storageClass: "local-path"
       #storageClass: "gp3"
       size: 10Gi
-
-  service:
-      type: NodePort
-      nodePorts:
-        postgresql: 30564
+    service:
+        type: NodePort
+        nodePorts:
+          postgresql: 30564
   
 #    serviceAccount:
 #      create: true
