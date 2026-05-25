@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/Saad7478/aws-argocd-postgres.git
     targetRevision: main
-    path: gitops/apps/postgres
+    path: apps/postgres
 
   destination:
     server: https://kubernetes.default.svc
