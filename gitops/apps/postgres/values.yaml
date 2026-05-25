@@ -15,8 +15,8 @@ postgresql:
   primary:
     persistence:
       enabled: true
-      storageClass: "gp3"
-      size: 10Gi
+      storageClass: "local-path"
+      size: 5Gi
 
     serviceAccount:
       create: true
