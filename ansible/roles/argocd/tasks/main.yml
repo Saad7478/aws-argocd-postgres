@@ -1,5 +1,5 @@
 # -------------------------------------------------------------
-# 1. Configuration des certificats K3s (TLS-SAN avec l'IP publique)
+# 1.  Configuration des certificats K3s (TLS-SAN avec l'IP publique)
 # -------------------------------------------------------------
 - name: Ensure K3s config directory exists
   ansible.builtin.file:
