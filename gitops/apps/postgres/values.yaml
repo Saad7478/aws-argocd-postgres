@@ -1,4 +1,7 @@
-#---
+global:
+  security:
+    allowInsecureImages: true
+
 postgresql:
   image:
     registry: public.ecr.aws
