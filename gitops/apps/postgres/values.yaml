@@ -2,43 +2,22 @@ global:
   security:
     allowInsecureImages: true
 
-postgresql:
-  image:
-    registry: public.ecr.aws
-    repository: bitnami/postgresql
-    tag: 16.4.0
+image:
+  registry: public.ecr.aws
+  repository: bitnami/postgresql
+  tag: 16.4.0
 
-  auth:
-    database: "devdb"
-    postgresPassword: "postgres123"
+auth:
+  database: "devdb"
+  postgresPassword: "postgres123"
 
-  primary:
-    persistence:
-      enabled: true
-      storageClass: "local-path"
-      #storageClass: "gp3"
-      size: 10Gi
-    service:
-        type: NodePort
-        nodePorts:
-          postgresql: 30564
-  
-#    serviceAccount:
-#      create: true
-#      annotations:
-#        eks.amazonaws.com/role-arn: "arn:aws:iam::123456789012:role/votre-role-iam-pgbackrest"
+primary:
+  persistence:
+    enabled: true
+    storageClass: "local-path"
+    size: 10Gi
 
-#    extendedConfiguration: |
-#      archive_mode = on
-#      archive_command = 'pgbackrest --stanza=db-main archive-push %p'
-#      wal_level = replica
-#      max_wal_senders = 10
-
-#    extraVolumeMounts:
-#      - name: pgbackrest-config
-#       mountPath: /etc/pgbackrest
-
-#    extraVolumes:
-#      - name: pgbackrest-config
-#        configMap:
-#          name: pgbackrest-config
+  service:
+    type: NodePort
+    nodePorts:
+      postgresql: 30564
