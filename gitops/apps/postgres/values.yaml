@@ -16,8 +16,14 @@ postgresql:
     persistence:
       enabled: true
       storageClass: "local-path"
-      size: 5Gi
+      #storageClass: "gp3"
+      size: 10Gi
 
+  service:
+      type: NodePort
+      nodePorts:
+        postgresql: 30564
+  
 #    serviceAccount:
 #      create: true
 #      annotations:
