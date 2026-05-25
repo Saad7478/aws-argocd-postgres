@@ -1,3 +1,4 @@
+#---
 postgresql:
   image:
     registry: public.ecr.aws
