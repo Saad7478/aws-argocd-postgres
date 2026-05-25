@@ -1,10 +1,13 @@
 terraform {
   backend "s3" {
-    bucket         = "my-terraform-state2478v1"
-    key            = "argocd/dev/terraform.tfstate"
+    #bucket         = "my-terraform-state2478v1"        #aws2
+    #key            = "argocd/dev/terraform.tfstate"    # aws2
+    bucket         = "my-terraform-state2478"         #aws1
+    key            = "database-sre/dev/terraform.tfstate" #aws1
     region         = "us-east-2"
     dynamodb_table = "terraform-locks"
-    profile = "aws2"
+    #profile = "aws2"
+    profile = "aws1"
   }
 }
 
@@ -44,6 +47,8 @@ module "security" {
 
   vpc_id = module.vpc.vpc_id
 
+  bucket_s3_arn = module.storage.bucket_s3_arn
+
   admin_cidr = var.admin_cidr
 
   tags = var.tags
@@ -58,6 +63,8 @@ module "compute" {
 
   kube_instance_type = var.kube_instance_type
 
+  instance_profile_name = module.security.kube_instance_profile_id
+  
   subnet_id = module.vpc.public_subnets_id
 
   public_azs = var.public_azs
@@ -67,6 +74,7 @@ module "compute" {
   tags = var.tags
 }
 
+
 module "storage" {
   source = "../../modules/storage"
 
@@ -74,7 +82,7 @@ module "storage" {
   
   public_azs = var.public_azs
 
-  instance_id = module.compute.kube_instance_id
+  #instance_id = module.compute.kube_instance_id
 
   tags = var.tags
 }

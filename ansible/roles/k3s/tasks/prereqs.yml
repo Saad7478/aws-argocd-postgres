@@ -34,3 +34,4 @@
 - name: Reboot if SELinux was changed
   reboot:
   when: selinux_status.changed
+

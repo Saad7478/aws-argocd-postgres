@@ -1,5 +1,0 @@
-- hosts: kube
-  become: true
-
-  roles:
-    - storage

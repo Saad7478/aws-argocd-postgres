@@ -12,6 +12,12 @@ variable "kube_instance_type" {
   type        = string
 }
 
+variable "instance_profile_name" {
+  description = "Instance profile name"
+
+  type = string
+}
+
 # -------------------
 # Networking
 # -------------------

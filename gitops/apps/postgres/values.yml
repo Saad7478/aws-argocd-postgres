@@ -1,8 +1,34 @@
-auth:
-  postgresPassword: postgres123
+postgresql:
+  auth:
+    database: "devdb"
+    # Note : En production réelle, préférez 'existingSecret' pour ArgoCD
+    postgresPassword: "postgres123" 
 
-primary:
-  persistence:
-    enabled: true
-    size: 10Gi
+  primary:
+    # Utilisation du stockage gp3 AWS moins cher configuré par K8s
+    persistence:
+      enabled: true
+      storageClass: "gp3"
+      size: 10Gi
 
+    # Liaison avec AWS IAM pour que le Pod ait le droit d'écrire sur S3 sans mot de passe
+    serviceAccount:
+      create: true
+      annotations:
+        eks.amazonaws.com/role-arn: "arn:aws:iam::123456789012:role/votre-role-iam-pgbackrest"
+
+    # Configuration de PostgreSQL pour déléguer l'archivage des WALs à pgBackRest
+    extendedConfiguration: |
+      archive_mode = on
+      archive_command = 'pgbackrest --stanza=db-main archive-push %p'
+      wal_level = replica
+      max_wal_senders = 10
+
+    # Montage de la configuration pgBackRest (définie dans le ConfigMap) dans le pod Postgres
+    extraVolumeMounts:
+      - name: pgbackrest-config
+        mountPath: /etc/pgbackrest
+    extraVolumes:
+      - name: pgbackrest-config
+        configMap:
+          name: pgbackrest-config

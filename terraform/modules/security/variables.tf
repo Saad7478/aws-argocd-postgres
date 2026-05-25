@@ -19,3 +19,9 @@ variable "admin_cidr" {
 
   type = string
 }
+
+variable "bucket_s3_arn" {
+  description = "Bucket S3 ARN"
+
+  type = string
+}

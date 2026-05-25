@@ -4,8 +4,6 @@ resource "local_file" "ansible_inventory" {
   content = templatefile("${path.module}/templates/hosts.tpl", {
     kube_ip = module.compute.kube_public_ip
     kube_id = module.compute.kube_instance_id
-    storage_volume_id = module.storage.volume_id
-    
   })
 }
 

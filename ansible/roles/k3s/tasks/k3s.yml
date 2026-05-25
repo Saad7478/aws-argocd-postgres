@@ -1,6 +1,6 @@
 - name: Install K3s
   shell: |
-    curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--docker" sh -
+    curl -sfL https://get.k3s.io | sh -
   args:
     creates: /usr/local/bin/k3s
 

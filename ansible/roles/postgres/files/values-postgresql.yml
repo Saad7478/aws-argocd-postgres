@@ -1,7 +1,0 @@
-auth:
-  postgresPassword: postgres123
-
-primary:
-  persistence:
-    enabled: true
-    size: 20Gi
