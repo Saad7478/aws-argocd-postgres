@@ -1,3 +1,4 @@
+#--
 apiVersion: v2
 name: postgres-gitops
 description: Application PostgreSQL avec pgBackRest et stockage S3 via ArgoCD
