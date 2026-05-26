@@ -2,22 +2,23 @@ global:
   security:
     allowInsecureImages: true
 
-image:
-  registry: public.ecr.aws
-  repository: bitnami/postgresql
-  tag: 16.4.0
+postgresql:
+  image:
+    registry: public.ecr.aws/bitnami
+    repository: bitnami/postgresql
+    tag: 16.4.0
 
-auth:
-  database: "devdb"
-  postgresPassword: "postgres123"
+  auth:
+    database: "devdb"
+    postgresPassword: "postgres123"
 
-primary:
-  persistence:
-    enabled: true
-    storageClass: "local-path"
-    size: 10Gi
+  primary:
+    persistence:
+      enabled: true
+      storageClass: "local-path"
+      size: 10Gi
 
-  service:
-    type: NodePort
-    nodePorts:
-      postgresql: 30564
+    service:
+      type: NodePort
+      nodePorts:
+        postgresql: 30564
