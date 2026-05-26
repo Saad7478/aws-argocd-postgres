@@ -12,15 +12,15 @@ spec:
     repoURL: https://github.com/Saad7478/aws-argocd-postgres.git
     targetRevision: main
     path: gitops/apps/postgres
-
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: postgres
-
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-
     syncOptions:
       - CreateNamespace=true
